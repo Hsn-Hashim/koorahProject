@@ -1,0 +1,137 @@
+body {
+  background-image: url("images/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;  
+  background-attachment: fixed;
+     font-family: sans-serif;
+      text-align: center;
+       padding: 20px;
+    }
+
+ #results{
+ animation: slideUp 1.5s ease-out forwards;
+    transition: background-color 0.6s;
+    transform: 0.6s;
+ }   
+.match {
+    background: hsl(228, 50%, 47%);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin: 10px auto;
+    padding: 15px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* يوزن العناصر عمودياً */
+    color: white;       /* يخلي النص أبيض عشان يبان على الخلفية الزرقاء */
+    text-align: center; /* يخلي اسم الفريق يجي في نص الشعار بالضبط */
+    animation: slideUp 1.5s ease-out forwards;
+    transition: background-color 0.6s;
+    transform: 0.6s;
+}
+.match:hover {
+    background-color: hsl(228, 51%, 34%); 
+    transform: scale(1.01);
+}
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }    
+}
+h1 {
+    color: rgb(234, 234, 234);
+    padding: 0%;
+    border-radius: 10px;
+    }
+.date{
+    align-content: center;
+    display: flex;
+    font-size: 20px;
+    color: white;
+    border: 1px solid white; 
+    border-radius: 5px; 
+    padding: 5px;
+    background-color: hsl(228, 50%, 33%);    
+}
+.logo {
+    width: 150px;         /* عرض ثابت للجميع */
+    height: 150px;        /* ارتفاع ثابت للجميع */
+    object-fit: contain; /* أهم سطر: يخلي الصورة كاملة تطلع داخل المربع بدون ما تتمطط أو تنقص */
+    display: block;      /* عشان تتجاوب مع الأبعاد صح */
+}
+button {
+    background-color: #ffffff;
+    color: hsl(228, 50%, 47%);
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: hsl(228, 50%, 47%);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+input[type="date"] {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    outline: none;
+    font-size: 16px;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+input[type="date"]:focus {
+    border-color: hsl(228, 50%, 47%);
+}
+table {
+    width: 90%;          /* عرض مناسب للشاشة */
+    margin: 20px auto;   /* توسيط الجدول */
+    border-collapse: collapse; 
+    background-color: rgba(255, 255, 255, 0.1); /* خلفية شفافة خفيفة للجدول عشان ينفصل عن الخلفية */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center; /* يوسط كل الأرقام والعناوين */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* خط فاصل خفيف */
+    color: white;
+}
+
+td:nth-child(2) { 
+    text-align: right; /* اسم الفريق خله يمين (لأننا عربي) */
+    width: 40%;        /* عطه مساحة أكبر من الباقين */
+}
+
+tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+select {
+    padding: 10px;
+    margin: 20px;
+    border-radius: 8px;
+    border: none;
+    background-color: white;
+    color: hsl(228, 50%, 47%); /* نفس لون الثيم حقك */
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
