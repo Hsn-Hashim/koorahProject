@@ -1,4 +1,4 @@
-const apiKey = "a049fb51ae0548559f2d5e6c8a8f6323"; 
+const apiKey = "a049fb51ae0548559f2d5e6c8a8f6323";
 let league = "PL"; // الدوري الإنجليزي الممتاز
 const baseUrl = "https://api.football-data.org/v4/competitions";
 const proxy = "https://corsproxy.io/?";
@@ -7,18 +7,18 @@ const resultsDiv = document.getElementById('results');
 const date = document.getElementById(`matchDate`);
 const requestOptions = {
     method: 'GET',
-    headers: { 
-        'X-Auth-Token': apiKey 
+    headers: {
+        'X-Auth-Token': apiKey
     }
 };
-function changeLeague() { 
+function changeLeague() {
     const leagueSelect = document.getElementById("leagueSelect");
     league = leagueSelect.value;
     resultsDiv.innerHTML = ``;
-     url = `https://corsproxy.io/?" + "https://api.football-data.org/v4/competitions/${league}/matches`;
+    url = `https://corsproxy.io/?" + "https://api.football-data.org/v4/competitions/${league}/matches`;
     standingsUrl = `https://corsproxy.io/?" + "https://api.football-data.org/v4/competitions/${league}/standings`;
 
-    }
+}
 async function getTodayMatches() {
     date.value = new Date().toISOString().split('T')[0];
     await getMatches();
@@ -52,22 +52,22 @@ async function getPlayingMatches() {
 }
 
 async function getMatches() {
-   
+
     if (date.value === "") {
         resultsDiv.innerHTML = "الرجاء اختيار تاريخ.";
-        return; 
+        return;
     }
     const url = `${proxy}${baseUrl}/${league}/matches`;
     const dayMatches = await getTheMatches(date, url, resultsDiv);
-    if (dayMatches.length===0) {
+    if (dayMatches.length === 0) {
         resultsDiv.innerHTML = "لا توجد مباريات اليوم.";
         return;
     }
-        
-        let allMatchesHTML = ``;
-        dayMatches.forEach(match => {
-            if (match.status === "TIMED") {
-                let matchDateStr = new Date(match.utcDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    let allMatchesHTML = ``;
+    dayMatches.forEach(match => {
+        if (match.status === "TIMED") {
+            let matchDateStr = new Date(match.utcDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
             allMatchesHTML += `
                 <div class="match">
                     <div>
@@ -82,7 +82,7 @@ async function getMatches() {
                 </div>
 
             `;
-            
+
         }
         else if (match.status === "FINISHED") {
             allMatchesHTML += `
@@ -91,7 +91,10 @@ async function getMatches() {
                     <img class="logo" src=${match.homeTeam.crest}>
                     <div>${match.homeTeam.name}</div>
                     </div>
+                    <span>
                     <div class="score">${match.score.fullTime.home} - ${match.score.fullTime.away}</div>
+                    <p>انتهت</p>
+                    </span>
                     <div>
                     <img class="logo" src=${match.awayTeam.crest}>
                     <div>${match.awayTeam.name}</div>
@@ -107,7 +110,10 @@ async function getMatches() {
                     <img class="logo" src=${match.homeTeam.crest}>
                     <div>${match.homeTeam.name}</div>
                     </div>
+                    <span>
                     <div class="score">${match.score.fullTime.home} - ${match.score.fullTime.away}</div>
+                    <p>انتهت</p>
+                    </span>
                     <div>
                     <img class="logo" src=${match.awayTeam.crest}>
                     <div>${match.awayTeam.name}</div>
@@ -131,28 +137,30 @@ async function getMatches() {
                 </div>
 
             `;
-            
-        }});
-        resultsDiv.innerHTML = allMatchesHTML;
-    }
+
+        }
+    });
+    resultsDiv.innerHTML = allMatchesHTML;
+}
 async function getTheMatches(date, url, resultsDiv) {
-     try {
-       const data =  await getData(url);
+    try {
+        const data = await getData(url);
         let dayMatches = data.matches.filter(match => {
             return new Date(match.utcDate).toDateString() === new Date(date.value).toDateString();
         });
         console.log(data.matches);
-        
+
         if (dayMatches.length === 0) {
             resultsDiv.innerHTML = "لا توجد مباريات اليوم.";
             return [];
         }
         return dayMatches;
-     } catch (error) {
+    } catch (error) {
         console.error(error);
         resultsDiv.innerHTML = `حدثت مشكلة: ${error.message}`;
         return [];
-}}
+    }
+}
 async function getStandings() {
     const standingsUrl = `${proxy}${baseUrl}/${league}/standings`;
     const data = await getData(standingsUrl);
@@ -172,7 +180,7 @@ async function getStandings() {
 </thead>
 <tbody>
        `;
-       table.forEach(team=>{
+    table.forEach(team => {
         standingHTML += `
         <tr>
         <td>${team.position}</td>
@@ -183,19 +191,20 @@ async function getStandings() {
         <td>${team.draw}</td>
         <td>${team.lost}</td>
         </tr>
-        `;})
-         standingHTML += `
+        `;
+    })
+    standingHTML += `
          </tbody>
          </table>
          </div>
          `;
-         resultsDiv.innerHTML = standingHTML;
-    
+    resultsDiv.innerHTML = standingHTML;
+
 }
- async function getData(url) {
-            const response = await fetch(url, requestOptions);
-            if (!response.ok) throw new Error(`خطأ: ${response.status}`);
-            
-            const data = await response.json();
-            return data;
-        }
+async function getData(url) {
+    const response = await fetch(url, requestOptions);
+    if (!response.ok) throw new Error(`خطأ: ${response.status}`);
+
+    const data = await response.json();
+    return data;
+}

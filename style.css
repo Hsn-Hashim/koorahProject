@@ -15,7 +15,7 @@ body {
     transform: 0.6s;
  }   
 .match {
-    background: hsl(228, 50%, 47%);
+    background: hsl(208, 30%, 57%);
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     margin: 10px auto;
@@ -31,7 +31,7 @@ body {
     transform: 0.6s;
 }
 .match:hover {
-    background-color: hsl(228, 51%, 34%); 
+    background-color: hsl(207, 23%, 39%); 
     transform: scale(1.01);
 }
 @keyframes slideUp {
