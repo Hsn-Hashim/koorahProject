@@ -112,7 +112,7 @@ async function getMatches() {
                     </div>
                     <span>
                     <div class="score">${match.score.fullTime.home} - ${match.score.fullTime.away}</div>
-                    <p>انتهت</p>
+                    <p>جارية الآن</p>
                     </span>
                     <div>
                     <img class="logo" src=${match.awayTeam.crest}>
